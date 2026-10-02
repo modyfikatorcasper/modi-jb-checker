@@ -23,7 +23,7 @@ The three initial records are supplied by the project owner. Their verification 
 | Unit | Prefix | Production | Firmware | Record status |
 | --- | --- | --- | --- | --- |
 | PS5 Slim · CFI-2116 B01Y | S01-F556… | 06.2025 | 11.20 | CONFIRMED, owner-reported |
-| PS5 Pro · CFI-7121 B01Y | S01-F258… | 2025, estimated; no printed date | Unknown | ESTIMATED / PENDING VERIFICATION |
+| PS5 Pro · CFI-7121 B01Y | S01-F258… | 2025, estimated; no printed date | 11.40 | CONFIRMED, owner-reported |
 | Marvel's Wolverine PS5 Slim · CFI-2116 BZJY | S01-V565… | 05.2026 | 13.20, factory / first observed | CONFIRMED, owner-reported |
 
 The Wolverine record also includes Vietnam manufacturing, EDM-051 and the supplied system string `26.03-13.20.00.06-00.00.00.0.1`. A System Information screen proves observed firmware, not an untouched update history; preserve this distinction when contributing.
@@ -33,7 +33,7 @@ The Wolverine record also includes Vietnam manufacturing, EDM-051 and the suppli
 1. Normalize the serial locally (case, spaces and the optional trailing ellipsis). The initial decoder supports `S01-` followed by a letter and digits; unrecognized formats are rejected with a clear format message. It does not claim to decode every regional PS5 serial format.
 2. Match the longest applicable public prefix in `verified-consoles.json` and `serial-rules.json`. Never return the complete input serial from the decoder.
 3. Narrow matches using optional model and production-month details. A contradictory model/date suppresses firmware estimation. Dates come from observed labels or explicit sourced rules, not a claimed universal serial-date formula.
-4. Estimate firmware from matching confirmed samples or sourced estimated rules. Different known values become a range. If any applicable sample lacks firmware evidence, firmware stays unknown. The pending Pro record does not borrow a firmware value from its model family.
+4. Estimate firmware from matching confirmed samples or sourced estimated rules. Different known values become a range. If any applicable sample lacks firmware evidence, firmware stays unknown. Pending records do not borrow a firmware value from their model family.
 5. Compare integer firmware components against editable public exploit metadata. No floating-point version comparisons and no exploit compatibility hardcoded into JavaScript.
 
 The current curated exploit snapshot is reviewed **2026-10-02**. [Relapse developer documentation](https://github.com/ntfargo/Relapse-Exploit) lists firmware 7.00–13.60. The UI says “Possibly compatible” for estimated firmware. The reference-unit detail view can say “Compatible with documented public exploit range” for a confirmed exact firmware. Neither promises unit-specific success, stability or a complete jailbreak. Outside the curated ranges means **not currently known in this database**, not proof that no public exploit exists. This project contains no exploit code.
@@ -77,7 +77,7 @@ GitHub Actions deployment uses GitHub's official [Pages workflow](https://docs.g
 
 Each file has `schema_version: 1` and `last_updated`. Every record/rule needs `source_id`, `source_name`, `source_url` (HTTPS or `null`), `source_date` and `data_type`. Sources must exist in `sources.json`. Record IDs must be unique. `node scripts/validate-data.js` validates these contracts and checks referenced proof files exist. The browser also validates the data and fails closed on unsafe identifiers or invalid records.
 
-To confirm the Pro record later, verify the original firmware and edit its `firmware`, `firmware_basis`, `status`, `verification_pending`, `verified_by`, `confidence`, `evidence`, `evidence_review`, `source_url`, `source_date` and optional `proof`. Set `status` to `CONFIRMED` and `verification_pending` to `false`. Update review dates. No application code changes are needed. An unrelated visitor's prefix result still remains ESTIMATED.
+The Pro record was confirmed at original firmware 11.40 by the project owner on 2026-10-02. To confirm a pending record, verify the original firmware and edit its `firmware`, `firmware_basis`, `status`, `verification_pending`, `verified_by`, `confidence`, `evidence`, `evidence_review`, `source_url`, `source_date` and optional `proof`. Set `status` to `CONFIRMED` and `verification_pending` to `false`. Update review dates. No application code changes are needed. An unrelated visitor's prefix result still remains ESTIMATED.
 
 New external serial rules belong in `rules` as objects with `id`, `serial_prefix` (at most eight characters), `status: "ESTIMATED"`, optional `model`, `console_family`, `production_period`, `production_from`, `production_to`, and `firmware` or `firmware_min`/`firmware_max`, plus all source metadata. Do not label a community rule as Modi-confirmed.
 

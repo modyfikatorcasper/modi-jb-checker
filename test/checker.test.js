@@ -11,7 +11,7 @@ const decode = (serial,extra = {},records = consoles.records) => decodeSerial({s
 test('all initial records validate without full serials or MAC addresses', () => {
   assert.equal(validateData({consoles,rules,firmware,sources}),true);
   assert.equal(consoles.records.length,3);
-  assert.equal(consoles.records.filter(record=>record.status === 'CONFIRMED').length,2);
+  assert.equal(consoles.records.filter(record=>record.status === 'CONFIRMED').length,3);
 });
 test('known Slim firmware remains an estimate for the entered serial', () => {
   const result = decode('S01-F556');
@@ -27,17 +27,23 @@ test('Wolverine prefix produces 13.20, preserves first-observed caveat and no un
   assert.equal(unit.status,'CONFIRMED'); assert.equal(unit.system_software,'26.03-13.20.00.06-00.00.00.0.1');
   assert.equal(checkFirmware(unit.firmware,firmware,{confirmed:true}).status,'compatible');
 });
-test('Pro without a printed date has unknown firmware, pending verification', () => {
+test('confirmed Pro at 11.40 keeps visitor matches estimated and production date unknown', () => {
   const result = decode('S01-F258');
-  assert.equal(result.status,'ESTIMATED'); assert.equal(result.firmware,null);
-  assert.equal(result.production_period,'2025'); assert.equal(result.verification_pending,true);
-  assert.equal(checkFirmware(result.firmware,firmware).status,'unknown');
+  assert.equal(result.status,'ESTIMATED'); assert.deepEqual(result.firmware,{min:'11.40',max:'11.40'});
+  assert.equal(result.production_period,'2025'); assert.equal(result.verification_pending,false);
+  assert.equal(checkFirmware(result.firmware,firmware).status,'possible');
+  const unit = consoles.records.find(record=>record.id === 'modi-pro-2025');
+  assert.equal(unit.status,'CONFIRMED'); assert.equal(unit.firmware_basis,'factory');
+  assert.equal(unit.production_date,null); assert.equal(unit.printed_production_date_present,false);
+  assert.equal(checkFirmware(unit.firmware,firmware,{confirmed:true}).status,'compatible');
 });
 test('pending Pro can be confirmed by a data-only edit', () => {
   const records = structuredClone(consoles.records), pro = records.find(record=>record.id === 'modi-pro-2025');
-  Object.assign(pro,{firmware:'11.20',status:'CONFIRMED',verification_pending:false,firmware_basis:'factory',verified_by:'Modi Diagnostic Lab / Modyfikator89'});
+  Object.assign(pro,{firmware:null,status:'ESTIMATED',verification_pending:true,firmware_basis:'unverified',verified_by:null});
+  assert.equal(decode('S01-F258',{},records).firmware,null);
+  Object.assign(pro,{firmware:'11.40',status:'CONFIRMED',verification_pending:false,firmware_basis:'factory',verified_by:'Modi Diagnostic Lab / Modyfikator89'});
   assert.equal(validateData({consoles:{...consoles,records},rules,firmware,sources}),true);
-  assert.equal(decode('S01-F258',{},records).firmware.min,'11.20');
+  assert.equal(decode('S01-F258',{},records).firmware.min,'11.40');
 });
 test('invalid, empty, markup and oversized serial input reject without echoing input', () => {
   for (const input of ['', 'garbage','CFI-2116','S01-V56','<script>alert(1)</script>','S01-V565'+'1'.repeat(40)]) {
@@ -75,7 +81,7 @@ test('contradictory verified samples create a range rather than cherry-picking',
 });
 test('version comparisons and range endpoints are correct', () => {
   assert.equal(compareVersions('11.20','11.02'),1);
-  for (const value of ['7.00','11.20','13.20','13.60']) assert.equal(checkFirmware(value,firmware,{confirmed:true}).status,'compatible');
+  for (const value of ['7.00','11.20','11.40','13.20','13.60']) assert.equal(checkFirmware(value,firmware,{confirmed:true}).status,'compatible');
   assert.equal(checkFirmware('13.61',firmware,{confirmed:true}).status,'not_known');
   assert.equal(checkFirmware('6.99',firmware).status,'not_known');
 });
@@ -95,6 +101,6 @@ test('public data rejects accidental full serials, false confirmation and unsour
   assert.throws(()=>validateData({consoles:mutated,rules,firmware,sources}),/prefix/);
   const privateData = structuredClone(consoles); privateData.records[0].mac_address='00:11:22:33:44:55';
   assert.throws(()=>validateData({consoles:privateData,rules,firmware,sources}),/MAC|Private/);
-  const bad = structuredClone(consoles); bad.records[1].status='CONFIRMED';
+  const bad = structuredClone(consoles); bad.records[1].firmware=null;
   assert.throws(()=>validateData({consoles:bad,rules,firmware,sources}),/Confirmed/);
 });

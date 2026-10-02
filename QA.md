@@ -13,7 +13,7 @@ Coverage includes invalid/empty/oversized input, known Slim and Wolverine prefix
 | Check | Result |
 | --- | --- |
 | S01-F556 | PS5 Slim, 11.20 estimate; reference unit CONFIRMED |
-| S01-F258, no date | PS5 Pro, estimated 2025 period, firmware unknown, pending verification |
+| S01-F258, no date | PS5 Pro, estimated 2025 period, 11.40 estimate; reference unit CONFIRMED |
 | S01-V565, no optional fields | PS5 Slim, CFI-2116 BZJY, 05.2026, 13.20 estimate, possibly compatible |
 | S01-X999 | UNKNOWN; no invented firmware |
 | Invalid and empty serial | Clear error; previous result removed |
@@ -21,7 +21,8 @@ Coverage includes invalid/empty/oversized input, known Slim and Wolverine prefix
 | Wolverine with matching model and date | ESTIMATED at 13.20, date identified as box input |
 | Full synthetic serial | Only its short prefix appears in the generated result |
 | Search Wolverine | One matching record |
-| Estimated filter | One pending Pro record |
+| Confirmed filter | Three owner-confirmed records, including Pro at 11.40 |
+| Estimated filter | Accessible empty state |
 | Unknown filter | Accessible empty state |
 | Record details | Firmware basis, source, Vietnam, EDM-051 and complete system software string visible |
 | Missing public proof | Disclosed explicitly; no fabricated evidence |
