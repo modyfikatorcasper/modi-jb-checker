@@ -1,0 +1,86 @@
+name: Submit verified PS5 firmware
+description: Submit one physical console with sanitized firmware evidence.
+title: "[Verified unit]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report one individual console. A matching batch does not confirm every unit.
+        **This is a public issue.** Do not publish your full serial, MAC addresses or personal information. Redact private barcodes/QR codes and strip image metadata. Export photos as flattened copies before attaching.
+  - type: input
+    id: model
+    attributes:
+      label: Console model
+      placeholder: CFI-2116 BZJY
+    validations:
+      required: true
+  - type: input
+    id: edition
+    attributes:
+      label: Edition
+      placeholder: Standard or limited edition name
+    validations:
+      required: true
+  - type: input
+    id: region
+    attributes:
+      label: Region
+      placeholder: Retail market / region, or unknown
+  - type: input
+    id: production
+    attributes:
+      label: Production date
+      description: Use the printed date, or write not printed. Explicitly label any estimate.
+      placeholder: 05.2026 / not printed
+    validations:
+      required: true
+  - type: input
+    id: prefix
+    attributes:
+      label: Serial prefix
+      description: At most the first eight characters. Never paste the unique ending digits.
+      placeholder: S01-V565…
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Original firmware
+      description: If original firmware is uncertain, identify the value as first observed.
+      placeholder: 13.20 / first observed
+    validations:
+      required: true
+  - type: textarea
+    id: history
+    attributes:
+      label: Verification and update history
+      description: Was it sealed/new? When did you first inspect it? Was it ever updated?
+    validations:
+      required: true
+  - type: textarea
+    id: box-photo
+    attributes:
+      label: Photo of box label
+      description: Attach only a sanitized flattened photo. Remove full serials, identifier barcodes/QR codes, MAC addresses and personal information.
+    validations:
+      required: true
+  - type: textarea
+    id: system-photo
+    attributes:
+      label: Photo of System Information
+      description: Keep software version visible; redact serials, MAC addresses and personal information.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Optional original publication/source URL, manufacturing country or motherboard information.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public evidence check
+      options:
+        - label: I removed unnecessary full serials, MAC addresses, identifying barcodes/QR codes and personal information from the text and photos.
+          required: true

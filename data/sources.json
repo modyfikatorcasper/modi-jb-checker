@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-02",
+  "sources": [
+    { "id": "modi-owner-records", "source_name": "Modi Diagnostic Lab / Modyfikator89", "source_url": null, "source_date": "2026-10-02", "data_type": "owner_supplied_unit_records", "notes": "Three records supplied by the project owner. CONFIRMED preserves the supplied physical-verification claim, not independent review by this site. Original publication links and redacted proof files were not supplied; pending entries remain unconfirmed." },
+    { "id": "relapse", "source_name": "Relapse — ntfargo and contributors", "source_url": "https://github.com/ntfargo/Relapse-Exploit", "source_date": "2026-10-02", "data_type": "public_developer_documentation", "notes": "Primary developer README documents public firmware support from 7.00 to 13.60. Only support metadata is transcribed. No exploit source code or third-party serial database is copied." },
+    { "id": "sony-model-family", "source_name": "Sony — PS5 model groups", "source_url": "https://www.playstation.com/en-us/support/hardware/ps5-usb-ports-guide/", "source_date": "2026-10-02", "data_type": "official_model_identification", "notes": "Official support identifies CFI-1000 and CFI-2000/7000 model groups. Sony's linked PS5 starter guide identifies CFI-7000 as Pro. Each model rule carries its supporting source; later CFI-2116 and CFI-7121 matches use only the supplied Modi records. Model recognition alone provides no factory firmware evidence." }
+  ]
+}

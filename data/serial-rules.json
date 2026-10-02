@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-02",
+  "notes": "Only observed prefixes are supported initially. No universal serial-to-date formula is asserted. Prefix matching also reads verified-consoles.json directly, so confirming a pending record needs no code changes.",
+  "model_rules": [
+    { "model_pattern": "^CFI-(10|11|12)[0-9]{2}(?:\\s|$)", "console_family": "PS5 Original", "source_id": "sony-model-family", "source_name": "Sony CFI-1000 model group", "source_url": "https://www.playstation.com/en-us/support/hardware/ps5-usb-ports-guide/", "source_date": "2026-10-02", "data_type": "model_group_identification" },
+    { "model_pattern": "^CFI-20[0-9]{2}(?:\\s|$)", "console_family": "PS5 Slim", "source_id": "sony-model-family", "source_name": "Sony CFI-2000 model group", "source_url": "https://www.playstation.com/en-us/support/hardware/ps5-usb-ports-guide/", "source_date": "2026-10-02", "data_type": "model_group_identification" },
+    { "model_pattern": "^CFI-2116(?:\\s|$)", "console_family": "PS5 Slim", "source_id": "modi-owner-records", "source_name": "Modi supplied CFI-2116 Slim records", "source_url": null, "source_date": "2026-10-02", "data_type": "owner_reported_model_identification" },
+    { "model_pattern": "^CFI-70[0-9]{2}(?:\\s|$)", "console_family": "PS5 Pro", "source_id": "sony-model-family", "source_name": "Sony CFI-7000 Pro model group", "source_url": "https://blog.ja.playstation.com/2021/06/07/20210607-ps5-2/", "source_date": "2026-10-02", "data_type": "model_group_identification" },
+    { "model_pattern": "^CFI-7121(?:\\s|$)", "console_family": "PS5 Pro", "source_id": "modi-owner-records", "source_name": "Modi supplied CFI-7121 Pro record", "source_url": null, "source_date": "2026-10-02", "data_type": "owner_reported_model_identification" }
+  ],
+  "rules": []
+}

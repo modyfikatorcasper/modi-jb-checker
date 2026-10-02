@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0d0b">
+  <meta name="description" content="Estimate PS5 factory firmware from retail-box serial prefixes. Physical-unit records, transparent confidence, and documented public exploit ranges. All checks run locally.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <title>MODI JB CHECKER · PS5 Serial &amp; Factory Firmware Database</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#checker">Skip to checker</a>
+  <header class="site-header wrap">
+    <a class="brand" href="./" aria-label="Modi JB Checker home"><span class="brand-mark" aria-hidden="true">M<span> /</span></span><span>MODI<span class="brand-sub">DIAGNOSTIC LAB</span></span></a>
+    <nav aria-label="Main navigation"><a href="#database">Database</a><a href="#methodology">Methodology</a></nav>
+  </header>
+  <main class="wrap">
+    <div class="page-heading"><div><p class="eyebrow">RETAIL BOX DIAGNOSTICS <span>/ PS5</span></p><h1>MODI <span>JB CHECKER</span></h1><p class="subtitle">PS5 Serial &amp; Factory Firmware Database</p></div><span class="local-chip">LOCAL PROCESSING</span></div>
+    <div class="workspace">
+      <section class="panel checker-panel" id="checker" aria-labelledby="checker-title">
+        <div class="panel-heading"><span class="step">01</span><h2 id="checker-title">Check your console</h2><span class="tag">NO UNBOXING NEEDED</span></div>
+        <p class="intro">Start with the serial on the retail box. Get a firmware estimate before you open it.</p>
+        <form id="checker-form" autocomplete="off" novalidate>
+          <label for="serial">Enter PS5 Serial Number</label>
+          <div class="serial-entry"><input id="serial" name="serial" type="text" placeholder="e.g. S01-V565…" maxlength="32" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="serial-help form-error" required><button id="check-button" class="button primary" type="submit" disabled>CHECK <span aria-hidden="true">⌕</span></button></div>
+          <p id="serial-help" class="hint">Full serial or known prefix. You can leave the ending digits out.</p>
+          <details class="extra-fields"><summary>Add box details <span>optional</span></summary><div class="field-grid"><div><label for="model">Model number</label><input id="model" type="text" placeholder="CFI-2116 BZJY" maxlength="24" autocomplete="off" spellcheck="false" autocapitalize="characters"></div><div><label for="production">Production date</label><input id="production" type="month" min="2020-01" max="2099-12"><p class="hint">Only if printed on the box.</p></div></div></details>
+          <p id="form-error" class="error" role="alert" hidden></p>
+        </form>
+        <p class="privacy"><span aria-hidden="true">▣</span> Serial numbers are processed locally in your browser and are not stored.</p>
+        <div class="checker-foot"><span>BOX DATA <b>→</b> BATCH MATCH <b>→</b> FIRMWARE ESTIMATE</span></div>
+      </section>
+      <aside class="panel result-panel" id="result-panel" aria-labelledby="result-title" aria-busy="false">
+        <div class="panel-heading"><span class="step">02</span><h2 id="result-title">Diagnostic result</h2></div>
+        <div id="result" aria-live="polite" aria-atomic="true"><div class="result-empty"><span class="scan-glyph" aria-hidden="true">[ <span>—</span> ]</span><h3>Ready when you are.</h3><p>Your model, expected firmware and exploit status will appear here.</p><div class="legend"><span class="badge confirmed">CONFIRMED</span><span class="badge estimated">ESTIMATED</span><span class="badge unknown">UNKNOWN</span></div><p class="small">A prefix match is an estimate, even when the reference unit is confirmed.</p></div></div>
+      </aside>
+    </div>
+    <section id="featured" class="featured" aria-label="Newest verified discovery" hidden></section>
+    <section class="database-section" id="database" aria-labelledby="database-title">
+      <div class="section-top"><div><p class="eyebrow">THE REFERENCE DATABASE</p><h2 id="database-title">Verified consoles <span id="record-count" class="count">—</span></h2></div><span class="small muted">Individual units. Never a whole-family guarantee.</span></div>
+      <div class="database-controls"><div class="search-field"><label class="sr-only" for="database-search">Search console records</label><span aria-hidden="true">⌕</span><input id="database-search" type="search" placeholder="Search model, edition or prefix" autocomplete="off" maxlength="100"></div><div id="filters" class="filters" role="group" aria-label="Filter by verification status"><button type="button" class="filter active" data-status="ALL" aria-pressed="true">All</button><button type="button" class="filter" data-status="CONFIRMED" aria-pressed="false">Confirmed</button><button type="button" class="filter" data-status="ESTIMATED" aria-pressed="false">Estimated</button><button type="button" class="filter" data-status="UNKNOWN" aria-pressed="false">Unknown</button></div></div>
+      <p id="database-state" class="small muted" role="status">Loading reference records…</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Console database; scroll horizontally on small screens"><table><caption class="sr-only">Modi physical-unit reference records. Only truncated serial prefixes are published.</caption><thead><tr><th scope="col">Model / Edition</th><th scope="col">Production</th><th scope="col">Serial prefix</th><th scope="col">Firmware</th><th scope="col">Status</th><th scope="col">Verified by</th><th scope="col"><span class="sr-only">Record details</span></th></tr></thead><tbody id="database-body"></tbody></table></div>
+      <p class="database-note">Confirmation describes the recorded unit. Your console may ship with different firmware. Initial Modi entries are owner-supplied reports; public proof files are pending.</p>
+    </section>
+    <section class="methodology" id="methodology" aria-labelledby="methodology-title"><div class="section-top"><div><p class="eyebrow">READ THE RESULT CORRECTLY</p><h2 id="methodology-title">Sources &amp; methodology</h2></div></div><div class="method-grid"><article><span class="badge confirmed">CONFIRMED</span><h3>Observed on one console.</h3><p>Firmware physically verified on the recorded unit or documented by direct original evidence. Initial records preserve Modi’s supplied verification claims; proof has not been independently reviewed here.</p></article><article><span class="badge estimated">ESTIMATED</span><h3>A reference, not a promise.</h3><p>Inferred from a matching prefix, batch or sourced production rule. One confirmed console never confirms another console, even with the same model or prefix.</p></article><article><span class="badge unknown">UNKNOWN</span><h3>Not enough evidence.</h3><p>No supported match, conflicting box details or no verified firmware. We leave firmware unknown instead of inventing a value.</p></article></div><details class="sources-details"><summary>How matching works &amp; source credits</summary><div class="sources-content"><p>The longest applicable serial prefix wins. Optional model and production details can narrow a match or flag a conflict. Dates are observations from box labels, not a universal serial-date formula. Community rules always remain estimates and include attribution.</p><p>Exploit support is a dated snapshot of public developer documentation. A supported firmware range is not a guarantee of stability, payload support or a complete jailbreak. Estimated firmware produces “Possibly compatible”. Firmware outside the curated ranges is “Not currently known to be compatible”; omitted ranges may still have public support.</p><p>Factory firmware and first-observed firmware are distinguished in each record. A System Information photo alone does not prove a console was never updated. For the Wolverine entry, 13.20 is the supplied factory / first-observed value.</p><ul id="source-list"></ul><p id="review-date" class="small muted"></p><p>No third-party serial dataset is bundled. Only the three supplied Modi records seed prefix matching. Exploit metadata is transcribed with attribution; no exploit code is included.</p></div></details></section>
+    <section class="contribute"><div><h2>Help make the next match better.</h2><p>Contribute a verified unit with a model, date, original firmware and redacted proof.</p></div><a class="button secondary" href="CONTRIBUTING.md">Contribution guide</a></section>
+  </main>
+  <footer class="wrap"><p>Verified data by <strong>Modi Diagnostic Lab / Modyfikator89</strong></p><span>Independent community project · Not affiliated with Sony</span></footer>
+  <dialog id="record-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><p class="eyebrow">REFERENCE UNIT</p><button id="close-dialog" class="icon-button" type="button" aria-label="Close record details">✕</button></div><div id="dialog-content"></div></dialog>
+  <noscript><p class="noscript wrap">Enable JavaScript to check a serial locally. The editable reference records are available in <a href="data/verified-consoles.json">verified-consoles.json</a>.</p></noscript>
+</body>
+</html>

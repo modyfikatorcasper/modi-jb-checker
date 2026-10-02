@@ -1,0 +1,10 @@
+{
+  "name": "modi-jb-checker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MODI JB CHECKER — PS5 Serial & Factory Firmware Database",
+  "scripts": { "test": "node --test", "validate": "node scripts/validate-data.js", "start": "node scripts/serve.js" },
+  "engines": { "node": ">=20.11" },
+  "license": "MIT"
+}

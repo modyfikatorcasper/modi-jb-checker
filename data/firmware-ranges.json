@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-02",
+  "notes": "Curated documentation snapshot, not an exhaustive exploit catalog. Never infer compatibility from version numbers alone. No automatic network refresh.",
+  "ranges": [
+    {
+      "id": "relapse-public-2026-10-02",
+      "firmware_min": "7.00",
+      "firmware_max": "13.60",
+      "status": "compatible",
+      "exploit_name": "Relapse",
+      "public": true,
+      "source_id": "relapse",
+      "source_name": "ntfargo / Relapse-Exploit README",
+      "source_url": "https://github.com/ntfargo/Relapse-Exploit",
+      "source": "https://github.com/ntfargo/Relapse-Exploit#readme",
+      "source_date": "2026-10-02",
+      "data_type": "public_developer_documentation",
+      "notes": "Developer documentation lists PS5 firmware 7.00 through 13.60. Public exploit-range support does not guarantee stability, payload compatibility or a complete jailbreak on a specific unit.",
+      "last_updated": "2026-10-02"
+    }
+  ]
+}
