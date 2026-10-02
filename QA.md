@@ -1,6 +1,6 @@
 # Verification report
 
-Checked 2026-10-02. This report describes local verification, not a completed GitHub deployment or independent physical-console evidence review.
+Checked 2026-10-02. Local verification is described below. The same 17 automated tests and public-data validation also passed in GitHub Actions. Physical-console evidence has not been independently reviewed.
 
 ## Automated checks
 
@@ -34,4 +34,4 @@ Checked widths **320, 375, 390, 768 and 1024 CSS pixels**. Page width never exce
 
 The project owner must attach genuine sanitized proof files and original publication URLs when available. The initial confirmation statuses preserve the supplied reports and are explicitly identified as owner-reported.
 
-The GitHub Actions workflow is included and follows official Pages deployment documentation, but has not been executed against a GitHub repository in this session. Public repository creation and live Pages deployment require the destination account and authenticated GitHub access. No deployment URL is claimed.
+The public repository is [modyfikatorcasper/modi-jb-checker](https://github.com/modyfikatorcasper/modi-jb-checker). GitHub Pages is configured to use the included Actions workflow. The first deployment started before Pages was enabled; only the failed deployment job was retried after configuration. The successful validation results were preserved. The checker URL is https://modyfikatorcasper.github.io/modi-jb-checker/.
