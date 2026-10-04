@@ -6,6 +6,12 @@
 
 A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
 
+> **Independent fan-made community project.** MODI JB CHECKER and Modi Diagnostic Lab are not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. PlayStation, PS5 and other product names and trademarks belong to their respective owners and are used only for hardware identification, compatibility descriptions and technical documentation.
+
+**Right to Repair:** this project supports right-to-repair principles by freely sharing technical knowledge that helps users identify, diagnose, maintain and repair their own hardware. This is a statement of the project's purpose, not a claim of any specific legal entitlement in any jurisdiction.
+
+Full disclaimer: [DISCLAIMER.md](DISCLAIMER.md)
+
 Use the **PL / EN** buttons in the header to switch between Polish and English. Polish is the default; `?lang=en` opens the English version. Switching updates results, filters, record details, evidence notes and errors without clearing your input. Only the language is reflected in the URL; serial numbers remain local. No cookies or browser storage are used. Data files are revalidated on page load so published corrections do not stay hidden behind a stale browser cache.
 
 ## What you can trust
@@ -127,4 +133,4 @@ test/checker.test.js
 .github/workflows/pages.yml
 ```
 
-Created by **Modi Diagnostic Lab** · **Modyfikator89**. Independent community project; not affiliated with Sony. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution.
+Created by **Modi Diagnostic Lab** · **Modyfikator89**. Independent fan-made community project; not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. Supports right-to-repair principles. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution. See [DISCLAIMER.md](DISCLAIMER.md).
