@@ -1,10 +1,12 @@
 # Verification report
 
-Checked 2026-10-02. Local verification is described below. The same 17 automated tests and public-data validation also passed in GitHub Actions. Physical-console evidence has not been independently reviewed.
+Original browser checks: 2026-10-02. PL / EN update checked 2026-10-04. Local verification is described below. Physical-console evidence has not been independently reviewed.
 
 ## Automated checks
 
-`node --test`: **17 passed, 0 failed**. `node scripts/validate-data.js`: **passed**. Browser application modules: JavaScript syntax checks passed.
+`node --test`: **20 passed, 0 failed**. `node scripts/validate-data.js`: **passed**. Browser application modules: JavaScript syntax checks passed.
+
+The PL / EN update adds regression checks for stable firmware/model identifiers, unchanged confirmation semantics, translated counts/dates/sources and Polish errors/evidence caveats. Browser checks verify Polish default, English switching, preservation of input and the existing Pro 11.40 result, bilingual record details and errors, localized search/filter behavior, language URL reload and mobile layout at 320 and 390 pixels. Header language buttons follow the separate PL / EN controls used by Modi Maps. Language switches do not store or transmit serials.
 
 Coverage includes invalid/empty/oversized input, known Slim and Wolverine prefixes, unknown prefixes, missing production date, pending Pro firmware, model/date contradictions, serial normalization, exact firmware rules, numeric version comparison, exploit-range boundaries, private exploit exclusion, partial support and gaps, differing verified samples, editable prefix rules and data-only promotion of the Pro entry. Public data validation rejects overlong serial identifiers, MAC addresses, private serial fields, unsourced entries, false confirmation, unsupported statuses and unsafe proof paths.
 

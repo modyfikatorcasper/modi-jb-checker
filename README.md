@@ -6,6 +6,8 @@
 
 A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
 
+Use the **PL / EN** buttons in the header to switch between Polish and English. Polish is the default; `?lang=en` opens the English version. Switching updates results, filters, record details, evidence notes and errors without clearing your input. Only the language is reflected in the URL; serial numbers remain local. No cookies or browser storage are used. Data files are revalidated on page load so published corrections do not stay hidden behind a stale browser cache.
+
 ## What you can trust
 
 | Label | Meaning |

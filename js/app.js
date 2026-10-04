@@ -1,13 +1,23 @@
 import { decodeSerial } from './serial-decoder.js';
 import { checkFirmware } from './firmware-checker.js';
 import { validateData } from './data-validation.js';
+import { translate as t, setLanguage, getLanguage, bindStaticCopy } from './i18n.js';
 
 const $ = id => document.getElementById(id);
-let data, filter = 'ALL';
+let data, filter = 'ALL', hasChecked = false, loadFailed = false;
+const applyStaticCopy = bindStaticCopy(document);
+setLanguage(new URL(location.href).searchParams.get('lang') === 'en' ? 'en' : 'pl');
+function updateLanguageControls() {
+  applyStaticCopy();
+  for (const button of $('language-switch').querySelectorAll('button')) {
+    button.setAttribute('aria-pressed',String(button.dataset.language === getLanguage()));
+  }
+}
+updateLanguageControls();
 const node = (tag, className, text) => {
   const element = document.createElement(tag);
   if (className) element.className = className;
-  if (text !== undefined) element.textContent = String(text);
+  if (text !== undefined) element.textContent = t(text);
   return element;
 };
 const badge = status => node('span', `badge ${status.toLowerCase()}`, status);
@@ -21,7 +31,7 @@ const sourceLink = (name, url) => {
 const detailButton = record => {
   const button = node('button', 'text-button', record.proof?.length ? 'VIEW PROOF' : 'Details');
   button.type = 'button';
-  button.setAttribute('aria-label', `${record.proof?.length ? 'View proof' : 'View details'} for ${record.model}`);
+  button.setAttribute('aria-label', getLanguage() === 'pl' ? `${record.proof?.length ? 'Zobacz dowody' : 'Zobacz szczegóły'}: ${record.model}` : `${record.proof?.length ? 'View proof' : 'View details'} for ${record.model}`);
   button.addEventListener('click', () => openRecord(record));
   return button;
 };
@@ -31,13 +41,14 @@ function metric(list, label, value, className = '') {
   list.append(group);
 }
 function showError(message) {
-  $('form-error').textContent = message;
+  $('form-error').textContent = t(message);
   $('form-error').hidden = false;
   $('serial').setAttribute('aria-invalid','true');
   $('result').replaceChildren(node('p','error','No result generated. Correct the input and check again.'));
 }
 function runCheck() {
   if (!data) return;
+  hasChecked = true;
   const result = decodeSerial({ serial: $('serial').value, model: $('model').value, production_date: $('production').value }, data.consoles.records, data.rules);
   if (!result.valid) { showError(result.error); return; }
   $('form-error').hidden = true;
@@ -72,7 +83,7 @@ function runCheck() {
 
 function renderDatabase() {
   const query = $('database-search').value.toLowerCase().trim();
-  const records = data.consoles.records.filter(record => (filter === 'ALL' || record.status === filter) && [record.model,record.console_family,record.edition,record.production_period,record.serial_prefix,record.firmware,record.status,record.verified_by,record.reported_by].some(value => String(value ?? '').toLowerCase().includes(query)));
+  const records = data.consoles.records.filter(record => (filter === 'ALL' || record.status === filter) && [record.model,record.console_family,record.edition,record.production_period,record.serial_prefix,record.firmware,record.status,record.verified_by,record.reported_by].some(value => String(value ?? '').toLowerCase().includes(query) || t(value).toLowerCase().includes(query)));
   const rows = records.map(record => {
     const row = node('tr');
     const model = node('td'); model.append(node('strong','',record.model),node('small','',`${record.console_family} · ${record.edition}`));
@@ -87,7 +98,7 @@ function renderDatabase() {
   });
   if (!rows.length) { const row = node('tr'), cell = node('td','muted','No records match these filters.'); cell.colSpan = 7; row.append(cell); rows.push(row); }
   $('database-body').replaceChildren(...rows);
-  $('database-state').textContent = `${records.length} of ${data.consoles.records.length} records · Prefixes only`;
+  $('database-state').textContent = t(`${records.length} of ${data.consoles.records.length} records · Prefixes only`);
 }
 
 function renderFeatured() {
@@ -120,12 +131,12 @@ function openRecord(record) {
   metric(metrics,'Documented exploit support',compatibility.label);
   content.append(metrics,node('p','small',record.evidence),node('p','small muted',record.evidence_review));
   const source = node('p','small','Source: '); source.append(sourceLink(record.source_name,record.source_url)); content.append(source);
-  for (const entry of compatibility.sources) { const p = node('p','small','Exploit source: '); p.append(sourceLink(entry.name,entry.url),document.createTextNode(` · Reviewed ${entry.last_updated}`)); content.append(p); }
+  for (const entry of compatibility.sources) { const p = node('p','small','Exploit source: '); p.append(sourceLink(entry.name,entry.url),document.createTextNode(t(` · Reviewed ${entry.last_updated}`))); content.append(p); }
   const proofs = node('div','proof-grid');
   for (const proof of record.proof ?? []) {
     // Keep evidence same-origin and in the dedicated sanitized public directory.
     if (!/^assets\/proof\/[A-Za-z0-9_/-]+\.(png|jpe?g|webp)$/i.test(proof.file) || proof.file.includes('..')) continue;
-    const figure = node('figure'), image = node('img'); image.src = proof.file; image.alt = proof.caption ?? proof.type.replaceAll('_',' '); image.loading = 'lazy';
+    const figure = node('figure'), image = node('img'); image.src = proof.file; image.alt = t(proof.caption ?? proof.type.replaceAll('_',' ')); image.loading = 'lazy';
     const link = node('a','','Open sanitized proof'); link.href = proof.file; link.target = '_blank'; link.rel = 'noopener';
     image.addEventListener('error', () => { image.replaceWith(node('p','error','Proof file could not be loaded.')); }, {once:true});
     figure.append(image,node('figcaption','',proof.caption ?? proof.type.replaceAll('_',' ')),link); proofs.append(figure);
@@ -151,11 +162,35 @@ $('record-dialog').addEventListener('click', event => {
   if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) event.target.close();
 });
 
+function renderSources() {
+  $('source-list').replaceChildren(...data.sources.sources.map(source => {
+    const li = node('li'); li.append(sourceLink(source.source_name,source.source_url),node('p','small',`${source.notes} Reviewed ${source.source_date}.`)); return li;
+  }));
+  $('review-date').textContent = t(`Database and exploit documentation last reviewed: ${data.firmware.last_updated}. Updates require a reviewed JSON edit.`);
+}
+function renderLoadError() {
+  $('database-state').textContent = t('Database could not be loaded. Reload the page or report an invalid data file.');
+  $('form-error').textContent = t('Reference data is unavailable. Open this project through a web server, such as GitHub Pages, then reload.');
+  $('form-error').hidden = false;
+}
+$('language-switch').addEventListener('click',event => {
+  const button = event.target.closest('[data-language]');
+  if (!button || button.dataset.language === getLanguage()) return;
+  setLanguage(button.dataset.language);
+  const url = new URL(location.href); url.searchParams.set('lang',getLanguage());
+  history.replaceState(null,'',url);
+  updateLanguageControls();
+  if (data) {
+    renderDatabase(); renderFeatured(); renderSources();
+    if (hasChecked) runCheck();
+  } else if (loadFailed) renderLoadError();
+});
+
 async function load() {
   try {
     const files = ['verified-consoles','serial-rules','firmware-ranges','sources'];
     const [consoles,rules,firmware,sources] = await Promise.all(files.map(async file => {
-      const response = await fetch(`data/${file}.json`,{credentials:'omit'});
+      const response = await fetch(`data/${file}.json`,{credentials:'omit',cache:'no-cache'});
       if (!response.ok) throw new Error('Data unavailable');
       return response.json();
     }));
@@ -164,14 +199,9 @@ async function load() {
     $('check-button').disabled = false;
     $('record-count').textContent = consoles.records.length;
     renderDatabase(); renderFeatured();
-    $('source-list').replaceChildren(...sources.sources.map(source => {
-      const li = node('li'); li.append(sourceLink(source.source_name,source.source_url),node('p','small',`${source.notes} Reviewed ${source.source_date}.`)); return li;
-    }));
-    $('review-date').textContent = `Database and exploit documentation last reviewed: ${firmware.last_updated}. Updates require a reviewed JSON edit.`;
+    renderSources();
   } catch {
-    $('database-state').textContent = 'Database could not be loaded. Reload the page or report an invalid data file.';
-    $('form-error').textContent = 'Reference data is unavailable. Open this project through a web server, such as GitHub Pages, then reload.';
-    $('form-error').hidden = false;
+    loadFailed = true; renderLoadError();
   }
 }
 load();
