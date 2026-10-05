@@ -2,7 +2,10 @@
 
 **PS5 Serial & Factory Firmware Database**
 
-[Open MODI JB CHECKER](https://modyfikatorcasper.github.io/modi-jb-checker/) · [Public repository](https://github.com/modyfikatorcasper/modi-jb-checker) · [Submit a verified unit](https://github.com/modyfikatorcasper/modi-jb-checker/issues/new?template=submit-verified-firmware.yml)
+## 🚀 Launch the tool
+
+**[OPEN MODI JB CHECKER →](https://modyfikatorcasper.github.io/modi-jb-checker/)**  
+[View all MODI projects →](https://github.com/modyfikatorcasper?tab=repositories) · [Public repository](https://github.com/modyfikatorcasper/modi-jb-checker) · [Submit a verified unit](https://github.com/modyfikatorcasper/modi-jb-checker/issues/new?template=submit-verified-firmware.yml)
 
 A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
 
