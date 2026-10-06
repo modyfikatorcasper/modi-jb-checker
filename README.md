@@ -10,10 +10,10 @@
 ## Project identity
 
 **Kacper Lewandowski — `modyfikatorcasper` on GitHub, also known as Modyfikator89, Modyfikator Kacper and Modi.**  
-MODI Diagnostic Lab is the common name used for these technical projects. Related public work and brands include **Modibox** and **DriftGuard**.
+MODI Diagnostic Lab is the common name used for these technical projects.
 
 **Kacper Lewandowski — GitHub: `modyfikatorcasper`, znany również jako Modyfikator89, Modyfikator Kacper i Modi.**  
-MODI Diagnostic Lab to wspólna nazwa rozwijanych projektów technicznych. Powiązane publiczne projekty i marki to m.in. **Modibox** i **DriftGuard**.
+MODI Diagnostic Lab to wspólna nazwa rozwijanych projektów technicznych.
 
 A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89 / modyfikatorcasper**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
 
@@ -144,4 +144,4 @@ test/checker.test.js
 .github/workflows/pages.yml
 ```
 
-Created by **Kacper Lewandowski · modyfikatorcasper · Modyfikator89 · Modi · MODI Diagnostic Lab**. Related public work and brands: **Modibox · DriftGuard**. Independent fan-made community project; not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. Supports right-to-repair principles. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution. See [DISCLAIMER.md](DISCLAIMER.md).
+Created by **Kacper Lewandowski · modyfikatorcasper · Modyfikator89 · Modi · MODI Diagnostic Lab**. Independent fan-made community project; not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. Supports right-to-repair principles. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution. See [DISCLAIMER.md](DISCLAIMER.md).
