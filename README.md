@@ -7,7 +7,15 @@
 **[OPEN MODI JB CHECKER →](https://modyfikatorcasper.github.io/modi-jb-checker/)**  
 [View all MODI projects →](https://github.com/modyfikatorcasper?tab=repositories) · [Public repository](https://github.com/modyfikatorcasper/modi-jb-checker) · [Submit a verified unit](https://github.com/modyfikatorcasper/modi-jb-checker/issues/new?template=submit-verified-firmware.yml)
 
-A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
+## Project identity
+
+**Kacper Lewandowski — `modyfikatorcasper` on GitHub, also known as Modyfikator89, Modyfikator Kacper and Modi.**  
+MODI Diagnostic Lab is the common name used for these technical projects. Related public work and brands include **Modibox** and **DriftGuard**.
+
+**Kacper Lewandowski — GitHub: `modyfikatorcasper`, znany również jako Modyfikator89, Modyfikator Kacper i Modi.**  
+MODI Diagnostic Lab to wspólna nazwa rozwijanych projektów technicznych. Powiązane publiczne projekty i marki to m.in. **Modibox** i **DriftGuard**.
+
+A fast, mobile-friendly retail-box checker from **Modi Diagnostic Lab / Modyfikator89 / modyfikatorcasper**. Enter an S01 serial or an eight-character prefix to estimate the console family, model, production period and original firmware. Checks run in your browser, with no backend or framework.
 
 > **Independent fan-made community project.** MODI JB CHECKER and Modi Diagnostic Lab are not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. PlayStation, PS5 and other product names and trademarks belong to their respective owners and are used only for hardware identification, compatibility descriptions and technical documentation.
 
@@ -136,4 +144,4 @@ test/checker.test.js
 .github/workflows/pages.yml
 ```
 
-Created by **Modi Diagnostic Lab** · **Modyfikator89**. Independent fan-made community project; not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. Supports right-to-repair principles. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution. See [DISCLAIMER.md](DISCLAIMER.md).
+Created by **Kacper Lewandowski · modyfikatorcasper · Modyfikator89 · Modi · MODI Diagnostic Lab**. Related public work and brands: **Modibox · DriftGuard**. Independent fan-made community project; not affiliated with, sponsored by, endorsed by or approved by Sony Interactive Entertainment. Supports right-to-repair principles. MIT-licensed original project code and supplied records; external documentation retains its authors' rights. Source links provide attribution. See [DISCLAIMER.md](DISCLAIMER.md).
